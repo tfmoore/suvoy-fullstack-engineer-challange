@@ -1,8 +1,10 @@
 import fetch from 'node-fetch';
 import fs from 'fs';
+require('dotenv').config();
 
-const API_URL_USERS = "https://challenge.sunvoy.com/api/users";
-const API_URL_USER_DETAILS = "https://challenge.sunvoy.com/api/settings";
+const API_URL_USERS = `${process.env.API_URL}/users`;
+const API_URL_USER_DETAILS = `${process.env.API_URL}/settings`;
+const ACCESS_TOKEN = process.env.ACCESS_TOKEN;
 
 const fetchUsers = async() => {
     try {
@@ -27,7 +29,7 @@ const fetchAuthenticatedUser = async() => {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": `Bearer ACCESS_TOKEN`// ACCESS_TOKEN is a placeholder for the token
+                "Authorization": `Bearer ${ACCESS_TOKEN}`
             },
         });
         const userDetails = await response.json();
